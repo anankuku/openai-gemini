@@ -2,7 +2,6 @@ import { Buffer } from "node:buffer";
 
 export default {
   async fetch (request) {
-    console.log("DEBUG_CHECK - API_KEY length:", process.env.API_KEY ? process.env.API_KEY.length : "EMPTY");
     if (request.method === "OPTIONS") {
       return handleOPTIONS();
     }
