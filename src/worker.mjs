@@ -2,6 +2,7 @@ import { Buffer } from "node:buffer";
 
 export default {
   async fetch (request) {
+    console.log("DEBUG_CHECK - API_KEY length:", process.env.API_KEY ? process.env.API_KEY.length : "EMPTY");
     if (request.method === "OPTIONS") {
       return handleOPTIONS();
     }
@@ -11,7 +12,7 @@ export default {
     };
     try {
       const auth = request.headers.get("Authorization");
-      const apiKey = auth?.split(" ")[1];
+      const apiKey = process.env.API_KEY || auth?.split(" ")[1];
       const assert = (success) => {
         if (!success) {
           throw new HttpError("The specified HTTP method is not allowed for the requested resource", 400);
